@@ -1,0 +1,84 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+
+package sample;
+
+
+// sample server
+service SampleServer {
+  // VM Creation
+  rpc CreateVM(CreateVMRequest) returns (CreateVMResponse) {
+    option (google.api.http) = { post: "/servers"; };
+  }
+
+  // VM List
+  rpc GetVMList(Empty) returns (GetVMListResponse) {
+    option (google.api.http) = { get: "/servers"; };
+  }
+
+  // VM Get
+  rpc GetVM(GetVMRequest) returns (GetVMResponse) {
+    option (google.api.http) = { get: "/servers/{vm_id}"; };
+  }
+
+  // VM Status
+  rpc GetVMStatus(GetVMStatusRequest) returns (GetVMStatusResponse) {
+    option (google.api.http) = { get: "/servers/{vm_id}/status"; };
+  }
+
+  // VM Delete
+  rpc DeleteVM(DeleteVMRequest) returns (Empty) {
+    option (google.api.http) = { delete: "/servers/{vm_id}"; };
+  }
+
+  // VM Name Availability Check
+  rpc CheckNameAvailability(CheckNameAvailabilityRequest) returns (Empty) {
+    option (google.api.http) = { get: "/check/{name}"; };
+  }
+}
+
+message Empty {
+}
+
+message array {
+  string id = 1;
+  string name = 2;
+}
+
+message CreateVMRequest {
+  string name = 1;
+}
+
+message CreateVMResponse {
+  string id = 1;
+}
+
+message GetVMListResponse {
+  array array = 1;
+}
+
+message GetVMRequest {
+  uint64 uuid = 1;
+}
+
+message GetVMResponse {
+  string id = 1;
+  string name = 2;
+}
+
+message GetVMStatusRequest {
+  uint64 uuid = 1;
+}
+
+message GetVMStatusResponse {
+  uint64 cpu_utilization = 1;
+}
+
+message DeleteVMRequest {
+  uint64 uuid = 1;
+}
+
+message CheckNameAvailabilityRequest {
+  uint64 name = 1;
+}
