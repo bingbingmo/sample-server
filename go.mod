@@ -1,4 +1,4 @@
-module sample
+module github.com/bingbingmo/sample-server
 
 go 1.14
 
