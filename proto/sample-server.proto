@@ -55,7 +55,7 @@ message CreateVMResponse {
 }
 
 message GetVMListResponse {
-  array array = 1;
+  repeated array arrays = 1;
 }
 
 message GetVMRequest {
