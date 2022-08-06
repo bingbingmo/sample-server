@@ -1,10 +1,10 @@
 package main
 
 import (
+	"github.com/bingbingmo/sample-server/handler"
+	sample "github.com/bingbingmo/sample-server/proto"
 	"github.com/micro/go-micro/v2"
 	"github.com/micro/go-micro/v2/logger"
-	"sample/handler"
-	sample "sample/proto"
 )
 
 func main() {

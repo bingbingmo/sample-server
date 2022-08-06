@@ -2,8 +2,8 @@ package example
 
 import (
 	"context"
+	sample "github.com/bingbingmo/sample-server/proto"
 	"github.com/micro/go-micro/v2/logger"
-	sample "sample/proto"
 )
 
 // CreateVM CreateVM

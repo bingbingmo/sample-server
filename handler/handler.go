@@ -2,8 +2,8 @@ package handler
 
 import (
 	"context"
-	"sample/internal/example"
-	"sample/proto"
+	"github.com/bingbingmo/sample-server/internal/example"
+	"github.com/bingbingmo/sample-server/proto"
 )
 
 // SampleServerHandler sample server handler
