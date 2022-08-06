@@ -59,7 +59,7 @@ message GetVMListResponse {
 }
 
 message GetVMRequest {
-  uint64 uuid = 1;
+  string uuid = 1;
 }
 
 message GetVMResponse {
@@ -68,7 +68,7 @@ message GetVMResponse {
 }
 
 message GetVMStatusRequest {
-  uint64 uuid = 1;
+  string uuid = 1;
 }
 
 message GetVMStatusResponse {
@@ -76,7 +76,7 @@ message GetVMStatusResponse {
 }
 
 message DeleteVMRequest {
-  uint64 uuid = 1;
+  string uuid = 1;
 }
 
 message CheckNameAvailabilityRequest {
