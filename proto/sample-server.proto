@@ -63,8 +63,7 @@ message GetVMRequest {
 }
 
 message GetVMResponse {
-  string id = 1;
-  string name = 2;
+  array array = 1;
 }
 
 message GetVMStatusRequest {
@@ -72,7 +71,7 @@ message GetVMStatusRequest {
 }
 
 message GetVMStatusResponse {
-  uint64 cpu_utilization = 1;
+  int32 cpu_utilization = 1;
 }
 
 message DeleteVMRequest {
@@ -80,5 +79,5 @@ message DeleteVMRequest {
 }
 
 message CheckNameAvailabilityRequest {
-  uint64 name = 1;
+  string name = 1;
 }

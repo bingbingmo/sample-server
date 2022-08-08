@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/bingbingmo/sample-server/internal/example"
 	"github.com/bingbingmo/sample-server/proto"
+	"github.com/micro/go-micro/v2/errors"
 )
 
 // SampleServerHandler sample server handler
@@ -16,26 +17,68 @@ func NewSampleServerHandler() (*SampleServerHandler, error) {
 	return &SampleServerHandler{}, nil
 }
 
-func (h *SampleServerHandler) CreateVM(ctx context.Context, in *sample.CreateVMRequest, out *sample.CreateVMResponse) error {
-	return example.CreateVM(ctx, in, out)
+func (h *SampleServerHandler) CreateVM(ctx context.Context, req *sample.CreateVMRequest, rsp *sample.CreateVMResponse) error {
+	var err error
+
+	rsp.Id, err = example.CreateVM(ctx, req)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
-func (h *SampleServerHandler) GetVMList(ctx context.Context, in *sample.Empty, out *sample.GetVMListResponse) error {
-	return example.GetVMList(ctx, in, out)
+func (h *SampleServerHandler) GetVMList(ctx context.Context, _ *sample.Empty, rsp *sample.GetVMListResponse) error {
+	var err error
+
+	rsp.Arrays, err = example.GetVMList(ctx)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
-func (h *SampleServerHandler) GetVM(ctx context.Context, in *sample.GetVMRequest, out *sample.GetVMResponse) error {
-	return example.GetVM(ctx, in, out)
+func (h *SampleServerHandler) GetVM(ctx context.Context, req *sample.GetVMRequest, rsp *sample.GetVMResponse) error {
+	var err error
+
+	rsp.Array, err = example.GetVM(ctx, req)
+	if err != nil {
+		return err
+	}
+
+	if rsp.Array == nil {
+		return errors.NotFound("sample", "detail")
+	}
+
+	return nil
 }
 
-func (h *SampleServerHandler) GetVMStatus(ctx context.Context, in *sample.GetVMStatusRequest, out *sample.GetVMStatusResponse) error {
-	return example.GetVMStatus(ctx, in, out)
+func (h *SampleServerHandler) GetVMStatus(ctx context.Context, req *sample.GetVMStatusRequest, rsp *sample.GetVMStatusResponse) error {
+	var err error
+
+	rsp.CpuUtilization, err = example.GetVMStatus(ctx, req)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
-func (h *SampleServerHandler) DeleteVM(ctx context.Context, in *sample.DeleteVMRequest, out *sample.Empty) error {
-	return example.DeleteVM(ctx, in, out)
+func (h *SampleServerHandler) DeleteVM(ctx context.Context, req *sample.DeleteVMRequest, _ *sample.Empty) error {
+	err := example.DeleteVM(ctx, req)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
-func (h *SampleServerHandler) CheckNameAvailability(ctx context.Context, in *sample.CheckNameAvailabilityRequest, out *sample.Empty) error {
-	return example.CheckNameAvailability(ctx, in, out)
+func (h *SampleServerHandler) CheckNameAvailability(ctx context.Context, req *sample.CheckNameAvailabilityRequest, _ *sample.Empty) error {
+	err := example.CheckNameAvailability(ctx, req)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
